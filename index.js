@@ -164,6 +164,9 @@ FSWatcher.prototype._emit = function(event, path, val1, val2, val3) {
         emitEvent();
       }
     });
+  } else if (awf && event === 'unlink' && this._pendingWrites[path]) {
+    // do not emit, clear tracking
+    delete this._pendingWrites[path];
   } else if (
     this.options.alwaysStat && val1 === undefined &&
     (event === 'add' || event === 'addDir' || event === 'change')

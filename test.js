@@ -1383,7 +1383,7 @@ function runTests(options) {
           .on('all', spy)
           .on('ready', function() {
             fs.writeFileSync(testPath, 'hello');
-            d(function() {
+            dd(function() {
               fs.unlinkSync(testPath);
               setTimeout(function() {
                 spy.should.not.have.been.calledWith(sinon.match.string, testPath);
